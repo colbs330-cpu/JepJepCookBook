@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的煮食日記</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
+        .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        #preview { width: 100%; border-radius: 8px; margin-top: 10px; display: none; }
+        textarea { width: 100%; height: 100px; margin-top: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        button { background: #ff6b6b; color: white; border: none; padding: 10px 20px; border-radius: 20px; width: 100%; font-size: 16px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>🍳 新增煮食記錄</h2>
+        <input type="text" id="dishName" placeholder="今天的菜名是？" style="width: 95%; padding: 8px;">
+        
+        <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none">
+        <button onclick="document.getElementById('cameraInput').click()">📸 拍攝美食照</button>
+        
+        <img id="preview" src="" alt="預覽圖">
+        
+        <textarea id="notes" placeholder="寫下你的烹飪心得（例如：鹽少放了一點...）"></textarea>
+        
+        <button style="background: #51cf66;" onclick="saveEntry()">保存記錄</button>
+    </div>
+
+    <script>
+        // 拍照預覽邏輯
+        const cameraInput = document.getElementById('cameraInput');
+        const preview = document.getElementById('preview');
+
+        cameraInput.onchange = evt => {
+            const [file] = cameraInput.files;
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = 'block';
+            }
+        }
+
+        function saveEntry() {
+            alert('記錄已暫存！(實際開發時可接資料庫)');
+        }
+
+        // 註冊 Service Worker (PWA 必備)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
