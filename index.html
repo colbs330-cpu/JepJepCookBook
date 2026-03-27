@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JepJep的私人食譜庫</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-orange-50 p-5">
+    <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
+        <h1 class="text-2xl font-bold text-orange-600 mb-4">🍳 我的食譜清單</h1>
+        <ul id="recipe-list" class="space-y-3">
+            </ul>
+    </div>
+
+    <script>
+        // 這裡以後可以對接數據庫，現在先手寫一個範例
+        const recipes = [
+            { name: "番茄炒蛋", time: "10分鐘" },
+            { name: "清燉牛肉", time: "120分鐘" }
+        ];
+        
+        const list = document.getElementById('recipe-list');
+        recipes.forEach(r => {
+            const li = document.createElement('li');
+            li.className = "p-3 border-b border-orange-100 hover:bg-orange-50 cursor-pointer";
+            li.innerHTML = `<strong>${r.name}</strong> <span class="text-sm text-gray-500">(${r.time})</span>`;
+            list.appendChild(li);
+        });
+    </script>
+</body>
+</html>
